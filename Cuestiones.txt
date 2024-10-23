@@ -1,0 +1,9 @@
+328. Transforma Soporte a una clase abstracta y comprueba que todo sigue funcionando. ¿Qué conseguimos al hacerla abstracta?
+
+Al ser abstracta, Soporte no puede instanciarse directamente. Solo podemos instanciar sus subclases, como CintaVideo, Dvd o Juego, lo que refuerza la idea de que Soporte es un concepto general y sus subclases son las que deben tener instancias concretas.(restricción de instanciación)
+
+ Podemos trabajar con los métodos definidos en Soporte de forma uniforme para cualquier tipo de soporte, pero siempre asegurando que las clases hijas implementen el comportamiento específico.(polimorfismo)
+
+329. Crea un interfaz Resumible, de manera que las clases que lo implementen deben ofrecer el método muestraResumen(). Modifica la clase Soporte y haz que implemente el interfaz. ¿Hace falta que también lo implementen los hijos?
+
+No, no es necesario que los hijos implementen el interfaz Resumible directamente, ya que la clase abstracta Soporte lo implementa. Lo que sí deben hacer los hijos es proporcionar una implementación para el método abstracto muestraResumen().

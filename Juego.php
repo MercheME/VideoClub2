@@ -27,7 +27,7 @@
             }
         }
 
-        public function muestraResumen() {
+        public function muestraResumen(): void {
             echo "Juego para: {$this->consola}";
             parent::muestraResumen();
             $this->muestraJugadoresPosibles();

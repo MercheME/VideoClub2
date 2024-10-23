@@ -16,7 +16,7 @@
             parent::__construct($titulo, $numero, $precio);
         }
     
-        public function muestraResumen() {
+        public function muestraResumen(): void {
             echo "Pelílula en DVD: ";
             parent::muestraResumen();
             echo "Idiomas: {$this->idiomas}<br>";

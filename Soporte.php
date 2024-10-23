@@ -1,7 +1,9 @@
 
 
 <?php
- class Soporte {
+
+require_once "./Resumible.php"; 
+ abstract class Soporte implements Resumible {
     private const IVA = 0.21;
     public function __construct(
         public string $titulo,
@@ -23,7 +25,7 @@
         return $this->numero;
     }
 
-    public function muestraResumen(){
+    public function muestraResumen(): void{
         echo "<br><em>{$this->titulo}</em>";
         echo "<br>" . number_format($this->getPrecio(), 2) . " € (IVA no incluido)<br>";
     }
