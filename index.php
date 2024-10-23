@@ -2,8 +2,15 @@
 
 <?php
 
-include_once "Dwes\ProyectoVideoclub\Videoclub.php"; 
-use Dwes\ProyectoVideoclub\Videoclub;
+include_once "./CintaVideo.php";
+include_once "./Cliente.php";
+include_once "./Dvd.php";
+include_once "./Juego.php";
+include_once "./Soporte.php";
+include_once "./Resumible.php";
+
+include_once "./Videoclub.php";
+
 
 $vc = new Videoclub("Severo 8A"); 
 

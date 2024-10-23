@@ -1,8 +1,8 @@
-
-
-
 <?php
-    require_once "Soporte.php";
+namespace Dwes\ProyectoVideoclub;
+
+    use Dwes\ProyectoVideoclub\Soporte;
+    include_once __DIR__ . "/Soporte.php";
 
     class Dvd extends Soporte {
 

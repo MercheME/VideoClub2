@@ -1,11 +1,15 @@
-
-
 <?php
-include_once "./Cliente.php";
-include_once "./CintaVideo.php";
-include_once "./Dvd.php";
-include_once "./Juego.php";
+namespace Dwes\ProyectoVideoclub;
 
+use Dwes\ProyectoVideoclub\Juego;
+use Dwes\ProyectoVideoclub\Cliente;
+use Dwes\ProyectoVideoclub\Dvd;
+use Dwes\ProyectoVideoclub\CintaVideo;
+
+include_once __DIR__ . "/Cliente.php";
+include_once __DIR__ . "/Dvd.php";
+include_once __DIR__ . "/CintaVideo.php";
+include_once __DIR__ . "/Juego.php";
 
 class Videoclub {
     private $nombre;
@@ -54,7 +58,7 @@ class Videoclub {
         echo "<br>Incluido socio " . ($this->numSocios) . "<br>";
     }
 
-    public function alquilarSocioProducto(int $numeroCliente, int $numeroSoporte): void {
+    public function alquilarSocioProducto(int $numeroCliente, int $numeroSoporte): self {
        $socioAlquilar = null;
         $productoAlquilar = null;
 
@@ -77,6 +81,8 @@ class Videoclub {
         } else {
             echo "Cliente o soporte no existe";
         }
+
+        return $this;
     }
 
     public function listarSocios(): void {

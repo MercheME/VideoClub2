@@ -1,5 +1,6 @@
-
 <?php
+namespace Dwes\ProyectoVideoclub;
+
  class Cliente {
     private $numSoportesAlquilados = 0; // Contador de alquileres
     private $soportesAlquilados = []; 

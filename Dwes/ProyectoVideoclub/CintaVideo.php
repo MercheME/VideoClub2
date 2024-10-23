@@ -1,8 +1,8 @@
-
-
 <?php
+namespace Dwes\ProyectoVideoclub;
 
-require_once "Soporte.php";
+use Dwes\ProyectoVideoclub\Soporte;
+include_once __DIR__ . "/Soporte.php";
 
 class CintaVideo extends Soporte {
 
@@ -22,8 +22,6 @@ class CintaVideo extends Soporte {
     }
 
 }
-
-
 
 
 ?>
