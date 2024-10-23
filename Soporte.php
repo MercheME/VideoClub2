@@ -25,7 +25,7 @@
 
     public function muestraResumen(){
         echo "<br><em>{$this->titulo}</em>";
-        echo "<br>Precio: " . number_format($this->getPrecio(), 2) . " € (IVA no incluido)<br>";
+        echo "<br>" . number_format($this->getPrecio(), 2) . " € (IVA no incluido)<br>";
     }
 
  }

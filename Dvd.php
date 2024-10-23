@@ -17,7 +17,7 @@
         }
     
         public function muestraResumen() {
-            echo "<br>Pelílula en DVD: ";
+            echo "Pelílula en DVD: ";
             parent::muestraResumen();
             echo "Idiomas: {$this->idiomas}<br>";
             echo "Formato Pantalla: {$this->formatPantalla}<br>";

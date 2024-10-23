@@ -40,7 +40,7 @@
 
     public function alquilar(Soporte $s): bool {
         if ($this->tieneAlquilado($s)) {
-            echo "El cliente {$this->nombre} ya tiene alquilado el soporte '{$s->titulo}'.<br>";
+            echo "<br>El cliente ya tiene alquilado el soporte de <strong>{$s->titulo}</strong><br>";
             return false;
         }
         
@@ -57,30 +57,35 @@
     }
 
     public function devolver(int $numSoporte):bool {
-        foreach($this->soportesAlquilados as $index => $soporte) {
-            if ($soporte->getNumero() === $numSoporte) {
-                //Si encuentra el soporte habría que eliminarlo
-                unset($this->soportesAlquilados[$index]);
-                $this->soportesAlquilados = array_values($this->soportesAlquilados); // Reindexar el array
-                $this->numSoportesAlquilados--;
-                echo "El cliente {$this->nombre} ha devuelto el soporte '{$soporte->titulo}' con éxito.<br>";
-                return true;
-            } 
+        if (!empty($this->soportesAlquilados)) {
+            echo  "No se ha podido encontrar el soporte en los alquileres de este cliente<br>";
+            return false;
+        } else {
+            foreach($this->soportesAlquilados as $index => $soporte) {
+                if ($soporte->getNumero() === $numSoporte) {
+                    //Si encuentra el soporte habría que eliminarlo
+                    unset($this->soportesAlquilados[$index]);
+                    $this->soportesAlquilados = array_values($this->soportesAlquilados); // Reindexar el array
+                    $this->numSoportesAlquilados--;
+                    echo "El cliente {$this->nombre} ha devuelto el soporte '{$soporte->titulo}' con éxito.<br>";
+                    return true;
+                } 
+            }
         }
+        
 
-        echo  "Este cliente no tiene alquilado ningún elemento.<br>";
+        echo  "<br>Este cliente no tiene alquilado ningún elemento<br>";
         return false; 
     }
 
     public function listaAlquileres(): void {
-        "Este cliente tiene {$this->numSoportesAlquilados} elementos alquilados.<br>";
+        echo "<br><strong>El cliente tiene {$this->numSoportesAlquilados} soportes alquilados</strong><br>";
         if ($this->numSoportesAlquilados > 0) {
-            echo "Soportes alquilados:<br>";
             foreach ($this->soportesAlquilados as $soporte) {
-                echo "- {$soporte->titulo}<br>";
+                echo $soporte->muestraResumen();
             }
         } else {
-            echo "Este cliente no tiene alquilado ningún elemento.<br>";
+            echo "No se ha podido encontrar el soporte en los alquileres de este cliente<br>";
         }
     }
 
