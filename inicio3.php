@@ -1,11 +1,9 @@
-
-
 <?php
+require_once './Autoload.php';
 
-include_once "Dwes\ProyectoVideoclub\Videoclub.php"; 
-use Dwes\ProyectoVideoclub\Videoclub;
-
+use App\Dwes\ProyectoVideoclub\Videoclub;
 $vc = new Videoclub("Severo 8A"); 
+
 
 //voy a incluir unos cuantos soportes de prueba 
 $vc->incluirJuego("God of War", 19.99, "PS4", 1, 1); 
@@ -39,3 +37,13 @@ $vc->alquilarSocioProducto(1, 2)
    ->alquilarSocioProducto(1, 3)
    ->alquilarSocioProducto(1, 2)
    ->alquilarSocioProducto(1, 6);
+
+
+
+$vc->alquilarSocioProductos(0, [1, 2, 3]);
+
+
+$vc->devolverSocioProducto(1, 1);
+
+
+$vc->devolverSocioProductos(1, [2, 3]);

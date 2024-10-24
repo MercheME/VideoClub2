@@ -1,5 +1,9 @@
 <?php
-namespace Dwes\ProyectoVideoclub;
+namespace App\Dwes\ProyectoVideoclub;
+
+use App\Dwes\ProyectoVideoclub\Util\SoporteNoEncontradoException;
+use App\Dwes\ProyectoVideoclub\Util\SoporteYaAlquiladoException;
+use App\Dwes\ProyectoVideoclub\Util\CupoSuperadoException;
 
  class Cliente {
     private $numSoportesAlquilados = 0; // Contador de alquileres
@@ -41,8 +45,7 @@ namespace Dwes\ProyectoVideoclub;
 
     public function alquilar(Soporte $s): bool {
         if ($this->tieneAlquilado($s)) {
-            echo "<br>El cliente ya tiene alquilado el soporte de <strong>{$s->titulo}</strong><br>";
-            return false;
+            throw new SoporteYaAlquiladoException( "El cliente ya tiene alquilado el soporte de <strong>{$s->titulo}</strong>");
         }
         
         if ($this->numSoportesAlquilados < $this->maxAlquilerConcurrente) {
@@ -52,15 +55,14 @@ namespace Dwes\ProyectoVideoclub;
             $s->muestraResumen();
             return true;
         } else {
-            echo "Este cliente tiene {$this->numSoportesAlquilados} elementos alquilados. No puede alquilar más en este videoclub hasta que no devuelva algo.<br>";
-            return false;
+            throw new CupoSuperadoException("Este cliente tiene {$this->numSoportesAlquilados} elementos alquilados. No puede alquilar más en este videoclub hasta que no devuelva algo.") ;
         }
     }
 
     public function devolver(int $numSoporte):bool {
-        if (!empty($this->soportesAlquilados)) {
-            echo  "No se ha podido encontrar el soporte en los alquileres de este cliente<br>";
-            return false;
+        if (empty($this->soportesAlquilados)) {
+            throw new SoporteNoEncontradoException("No se ha podido encontrar el soporte en los alquileres de este cliente<br>");
+            
         } else {
             foreach($this->soportesAlquilados as $index => $soporte) {
                 if ($soporte->getNumero() === $numSoporte) {
@@ -74,9 +76,8 @@ namespace Dwes\ProyectoVideoclub;
             }
         }
         
-
-        echo  "<br>Este cliente no tiene alquilado ningún elemento<br>";
-        return false; 
+        throw new SoporteNoEncontradoException("Este cliente no tiene alquilado ningún elemento");
+ 
     }
 
     public function listaAlquileres(): void {
