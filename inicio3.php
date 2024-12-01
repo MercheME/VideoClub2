@@ -6,7 +6,7 @@ $vc = new Videoclub("Severo 8A");
 
 
 //voy a incluir unos cuantos soportes de prueba 
-$vc->incluirJuego("God of War", 19.99, "PS4", 1, 1); 
+$vc->incluirJuego("God of War", 19.99, "PS4", 1, maxJugadores: 1); 
 $vc->incluirJuego("The Last of Us Part II", 49.99, "PS4", 1, 1);
 $vc->incluirDvd("Torrente", 4.5, "es","16:9"); 
 $vc->incluirDvd("Origen", 4.5, "es,en,fr", "16:9"); 
@@ -18,8 +18,8 @@ $vc->incluirCintaVideo("El nombre de la Rosa", 1.5, 140);
 $vc->listarProductos(); 
 
 //voy a crear algunos socios 
-$vc->incluirSocio("Amancio Ortega"); 
-$vc->incluirSocio("Pablo Picasso", 2); 
+//$vc->incluirSocio("Amancio Ortega"); 
+//$vc->incluirSocio("Pablo Picasso", 2); 
 
 $vc->alquilarSocioProducto(1,2); 
 $vc->alquilarSocioProducto(1,3); 
@@ -38,12 +38,8 @@ $vc->alquilarSocioProducto(1, 2)
    ->alquilarSocioProducto(1, 2)
    ->alquilarSocioProducto(1, 6);
 
-
-
 $vc->alquilarSocioProductos(0, [1, 2, 3]);
 
-
 $vc->devolverSocioProducto(1, 1);
-
 
 $vc->devolverSocioProductos(1, [2, 3]);

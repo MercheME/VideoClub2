@@ -7,23 +7,42 @@ use App\Dwes\ProyectoVideoclub\Util\CupoSuperadoException;
 
  class Cliente {
     private $numSoportesAlquilados = 0; // Contador de alquileres
-    private $soportesAlquilados = []; 
+    public $soportesAlquilados = []; 
+
     public function __construct(
         public string $nombre,
         private int $numero,
         private int $maxAlquilerConcurrente = 3,
+        public $nombreUsuario,
+        public $contraseniaUsuario,
     ) {}
 
     public function getNumero() {
         return $this->numero;
     }
 
+    public function getNombre(): string {
+        return $this->nombre;
+    }
+    
     public function setNumero($numero) {
         $this->numero = $numero;
     }
 
     public function getNumSoportesAlquilados() {
         return $this->numSoportesAlquilados;
+    }
+
+    public function getAlquileres(): array {
+        return $this->soportesAlquilados;
+    }
+
+    public function getNombreUsuario() {
+        return $this->nombreUsuario;
+    }
+
+    public function getContraseniaUsuario() {
+        return $this->contraseniaUsuario;
     }
 
     public function tieneAlquilado( Soporte $s) {
@@ -33,7 +52,6 @@ use App\Dwes\ProyectoVideoclub\Util\CupoSuperadoException;
         return false;
     }
         
-
     public function alquilarSoporte($soporte) {
         if ($this->numSoportesAlquilados < $this->maxAlquilerConcurrente) {
             $this->soportesAlquilados[] = $soporte;
@@ -82,6 +100,7 @@ use App\Dwes\ProyectoVideoclub\Util\CupoSuperadoException;
 
     public function listaAlquileres(): void {
         echo "<br><strong>El cliente tiene {$this->numSoportesAlquilados} soportes alquilados</strong><br>";
+        echo "<br>";
         if ($this->numSoportesAlquilados > 0) {
             foreach ($this->soportesAlquilados as $soporte) {
                 echo $soporte->muestraResumen();
@@ -92,11 +111,7 @@ use App\Dwes\ProyectoVideoclub\Util\CupoSuperadoException;
     }
 
     public function muestraResumen() {
-        echo "<br>Nombre: {$this->nombre} <br>";
-        echo "Total de alquileres: " . count($this->soportesAlquilados) . " <br>";
-
         if (count($this->soportesAlquilados) > 0) {
-            echo "Soportes alquilados:<br>";
             foreach ($this->soportesAlquilados as $soporte) {
                 $soporte->muestraResumen(); 
             }

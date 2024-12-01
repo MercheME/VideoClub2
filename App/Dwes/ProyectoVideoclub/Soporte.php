@@ -16,6 +16,9 @@ include_once __DIR__ . "/Resumible.php";
         private float $precio,
     ) {}
 
+    public function getTitutlo() {
+        return $this->titulo;
+    }
     public function getPrecio(): float {
         return $this->precio;
     }
@@ -51,7 +54,7 @@ include_once __DIR__ . "/Resumible.php";
     }
 
     public function muestraResumen(): void{
-        echo "<br><em>{$this->titulo}</em>";
+        echo "<br><strong>{$this->titulo}</strong>";
         echo "<br>" . number_format($this->getPrecio(), 2) . " € (IVA no incluido)<br>";
     }
 

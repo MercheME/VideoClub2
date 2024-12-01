@@ -11,7 +11,6 @@ use App\Dwes\ProyectoVideoclub\Util\CupoSuperadoException;
 use App\Dwes\ProyectoVideoclub\Util\SoporteYaAlquiladoException;
 use App\Dwes\ProyectoVideoclub\Util\SoporteNoEncontradoException;
 
-
 include_once __DIR__ . "/Cliente.php";
 include_once __DIR__ . "/Dvd.php";
 include_once __DIR__ . "/CintaVideo.php";
@@ -19,15 +18,35 @@ include_once __DIR__ . "/Juego.php";
 
 class Videoclub {
     private $nombre;
-    private $productos = [];
-    private $numProductos = 0;
-    private $socios = [];
-    private $numSocios = 0;
-    private $numProductosAlquilados = 0; 
-    private $numTotalAlquileres = 0; 
+    private $productos;
+    private $numProductos;
+    private $socios;
+    private $numSocios;
+    private $numProductosAlquilados; 
+    private $numTotalAlquileres;
 
 
-    public function __construct( $nombre ) {}
+    public function __construct( $nombre ) {
+        $this->nombre = $nombre;
+        $this->productos = [];
+        $this->socios = [];
+        $this->numProductos = 0;
+        $this->numSocios = 0;
+        $this->numProductosAlquilados = 0;
+        $this->numTotalAlquileres = 0;
+    }
+
+    public function getSocios() {
+        return is_array($this->socios) ? $this->socios : [];
+    }
+
+    public function setSocios($socios) {
+        $this->socios = $socios;
+    }
+    
+    public function getSoportes() {
+        return is_array($this->productos) ? $this->productos : [];
+    }
 
     private function incluirProducto(Soporte $producto) {
         $this->productos[] = $producto;
@@ -54,12 +73,12 @@ class Videoclub {
         echo "<br>Listado de los " . count($this->productos) . " productos disponibles:<br>";
         foreach ($this->productos as $producto) {
             echo "{$producto->getNumero()} .- ";
-            $producto->muestraResumen();
+            $producto->muestraResumen(); 
         }
     }
 
-    public function incluirSocio(string $nombre, int $maxAlquileresConcurrentes = 3): void {
-        $socio = new Cliente($nombre, $this->numSocios , $maxAlquileresConcurrentes);
+    public function incluirSocio(string $nombre, int $maxAlquileresConcurrentes = 3, string $user, string $password): void {
+        $socio = new Cliente($nombre, $this->numSocios + 1 , $maxAlquileresConcurrentes, $user, $password);
         $this->socios[] = $socio;
         $this->numSocios++;
         echo "<br>Incluido socio " . ($this->numSocios) . "<br>";
@@ -100,23 +119,19 @@ class Videoclub {
                 $this->numProductosAlquilados++;
             }
 
-            } catch (ClienteNoEncontradoException $e) {
-                echo "Error: " . $e->getMessage() . "<br>";
+        } catch (ClienteNoEncontradoException $e) {
+            echo "Error: " . $e->getMessage() . "<br>";
+        } catch (SoporteNoEncontradoException $e) {
+            echo "Error: " . $e->getMessage() . "<br>";
+        } catch (SoporteYaAlquiladoException $e) {
+            echo "Error: " . $e->getMessage() . "<br>";
+        } catch (CupoSuperadoException $e) {
+            echo "Error: " . $e->getMessage() . "<br>";
+        } catch (\Exception $e) {
+            echo "Error inesperado: " . $e->getMessage() . "<br>";
+        }
         
-            } catch (SoporteNoEncontradoException $e) {
-                echo "Error: " . $e->getMessage() . "<br>";
-        
-            } catch (SoporteYaAlquiladoException $e) {
-                echo "Error: " . $e->getMessage() . "<br>";
-        
-            } catch (CupoSuperadoException $e) {
-                echo "Error: " . $e->getMessage() . "<br>";
-        
-            } catch (\Exception $e) {
-                echo "Error inesperado: " . $e->getMessage() . "<br>";
-            }
-        
-            return $this;
+        return $this;
     }
 
 
@@ -192,8 +207,8 @@ class Videoclub {
     public function listarSocios(): void {
         echo "<br>Listado de " . count($this->socios) . " socios del videoclub:<br>";
         foreach ($this->socios as $index => $socio) {
-            echo ($index + 1) . ".- Cliente " . ($socio->getNumero()) . ": " . $socio->nombre . "<br>";  
-            echo "Alquileres actuales: ". $socio->getNumSoportesAlquilados() . '<br>';
+            echo ($index + 1) . ".- Cliente " . ($socio->getNumero()) . ": " . $socio->getNombre() . "<br>";  
+            echo "Alquileres actuales: " . $socio->getNumSoportesAlquilados() . '<br>';
         }
     }
 

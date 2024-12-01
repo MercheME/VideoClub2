@@ -15,13 +15,17 @@ class CintaVideo extends Soporte {
         parent::__construct($titulo, $numero, $precio);
     }
 
+
+    public function getDuracion(): int {
+        return $this->duracion;
+    }
+
     public function muestraResumen(): void {
-        echo "Película en VHS: ";
+        echo "<br>";
+        echo "📼 Película en VHS: ";
         parent::muestraResumen();
         echo "Duración: {$this->duracion} minutos<br>";
     }
-
 }
-
 
 ?>

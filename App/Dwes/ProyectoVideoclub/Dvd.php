@@ -15,9 +15,13 @@ namespace App\Dwes\ProyectoVideoclub;
         ) {
             parent::__construct($titulo, $numero, $precio);
         }
+
+        public function getIdiomas(): string { return $this->idiomas; }
+        public function getFormatPantalla(): string { return $this->formatPantalla; }
     
         public function muestraResumen(): void {
-            echo "Pelílula en DVD: ";
+            echo "<br>";
+            echo "📀 Pelílula en DVD: ";
             parent::muestraResumen();
             echo "Idiomas: {$this->idiomas}<br>";
             echo "Formato Pantalla: {$this->formatPantalla}<br>";

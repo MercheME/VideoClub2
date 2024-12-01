@@ -18,6 +18,18 @@ namespace App\Dwes\ProyectoVideoclub;
             parent::__construct($titulo, $numero, $precio);
         }
 
+        public function getConsola(): string {
+            return $this->consola;
+        }
+
+        public function getMinNumJugadores(): int {
+            return $this->minNumJugadores;
+        }
+
+        public function getMaxNumJugadores(): int {
+            return $this->minNumJugadores;
+        }
+
 
         public function muestraJugadoresPosibles() {
 
@@ -29,7 +41,8 @@ namespace App\Dwes\ProyectoVideoclub;
         }
 
         public function muestraResumen(): void {
-            echo "Juego para: {$this->consola}";
+            echo "<br>";
+            echo "🎮 Juego para: {$this->consola}";
             parent::muestraResumen();
             $this->muestraJugadoresPosibles();
         }
